@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock and Date</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+            background-image: linear-gradient(to right, cyan, crimson);
+        }
+
+        .heading {
+            margin-top: 9rem;
+            color: #fff;
+            font-size: 2.3rem;
+            text-decoration: underline;
+        }
+
+        #container {
+            width: 32%;
+            height: 50%;
+            max-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: auto;
+            background-color: #fff;
+            background-image: linear-gradient(to right, red, blue);
+            padding: 20px;
+            border-radius: 1rem;
+            box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .clock {
+            display: flex;
+            align-items: center;
+        }
+
+        #time {
+            position: relative;
+            font-size: 2.7rem;
+            color: gold;
+        }
+
+        #timeFormat {
+            position: absolute;
+            top: 15.7rem;
+            left: 37.7rem;
+            font-size: 1.3rem;
+            color: goldenrod;
+            font-weight: bold;
+        }
+
+        #dateFormat {
+            font-size: 1.5rem;
+            color: white;
+            font-weight: bold;
+        }
+
+        @media screen and (max-width: 768px) {
+            .heading {
+                font-size: 2rem;
+            }
+
+            #container {
+                width: 50%;
+                height: 50%;
+                padding: 15px;
+            }
+
+            #time {
+                position: relative;
+                font-size: 2.6rem;
+                color: #fff;
+            }
+
+            #timeFormat {
+                position: absolute;
+                top: 15rem;
+                left: 20.2rem;
+                font-size: 1.2rem;
+                font-weight: bold;
+                color: #fff;
+            }
+
+            #dateFormat {
+                font-size: 1.3rem;
+                color: white;
+                font-weight: bold;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .heading {
+                margin-top: 12rem;
+                font-size: 1.6rem;
+            }
+
+            #container {
+                max-width: 100%;
+                width: 90%;
+                height: 50%;
+                padding: 10px;
+            }
+
+            #time {
+                position: relative;
+                font-size: 2.3rem;
+                color: #fff;
+            }
+
+            #timeFormat {
+                position: absolute;
+                top: 16.6rem;
+                left: 8.3rem;
+                font-size: 1.1rem;
+                font-weight: bold;
+                color: #fff;
+            }
+
+            #dateFormat {
+                font-size: 1.2rem;
+                color: white;
+                font-weight: bold;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 class="heading">Digital Clock and Date</h1>
+    <div id="container">
+        <div class="clock">
+            <h1 id="time"></h1>
+            <span id="timeFormat"></span>
+        </div>
+        <div class="date">
+            <p id="dateFormat">24/07/2025</p>
+        </div>
+    </div>
+
+</body>
+
+<script>
+
+    // TIME FORMATE
+    let time = document.getElementById('time')
+    let timeFormate = document.getElementById('timeFormat')
+
+    document.addEventListener('DOMContentLoaded', () => {
+        setInterval(showTime, 1000)
+    })
+
+    const showTime = () => {
+        let times = new Date();
+
+        let hr = times.getHours();
+        let mins = times.getMinutes();
+        // let secs = times.getSeconds();
+
+        hr = hr < 10 ? `0${hr}` : hr;
+        mins = mins < 10 ? `0${mins}` : mins;
+        // secs = secs < 10 ? `0${secs}` : secs;
+
+        time.innerHTML = `${hr} : ${mins}`
+        timeFormat.innerHTML = hr > 12 ? "PM" : "AM";
+    }
+
+    // // DATE FORMATE
+    function currentDate() {
+        let date = document.getElementById('dateFormat')
+        let today = new Date()
+
+        let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+        let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+
+        let dateFormat = `${days[today.getDay()]} , ${months[today.getMonth()]} ${today.getDate()} ${today.getFullYear()}`
+        date.textContent = dateFormat
+    }
+    window.onload = currentDate;
+
+
+
+
+
+</script>
+
+</html>
